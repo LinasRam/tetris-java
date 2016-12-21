@@ -1,5 +1,6 @@
 package tetris;
 
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 public class Frame extends JFrame {
@@ -14,7 +15,29 @@ public class Frame extends JFrame {
 
         this.panel = new Panel();
         this.add(this.panel);
-        this.addKeyListener(new KeyController(this.panel.getGame()));
+        this.addKeyListener(new KeyController(this.panel));
+    }
+
+    public void start() {
+        final Frame frame = this;
+        
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                        panel.getGame().dropPieceDown();
+                        panel.repaint();
+
+                        if (panel.getGame().isOver()) {
+                            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                        }
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        }.start();
     }
 
 }
