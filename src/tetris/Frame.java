@@ -5,22 +5,27 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame {
 
-    Panel panel;
+    private static Frame instance = new Frame();
 
-    public Frame() {
+    Panel panel = Panel.getInstance();
+
+    private Frame() {
         this.setName("Tetris");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(12 * 26 + 10, 26 * 23 + 25);
         this.setVisible(true);
 
-        this.panel = new Panel();
         this.add(this.panel);
-        this.addKeyListener(new KeyController(this.panel));
+        this.addKeyListener(KeyController.getInstance());
+    }
+
+    public static Frame getInstance() {
+        return instance;
     }
 
     public void start() {
-        final Frame frame = this;
-        
+        final Frame frame = getInstance();
+
         new Thread() {
             @Override
             public void run() {

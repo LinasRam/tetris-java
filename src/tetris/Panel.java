@@ -5,14 +5,20 @@ import javax.swing.JPanel;
 
 public class Panel extends JPanel {
 
-    private Game game;
+    private static Panel instance = new Panel();
 
-    public Panel() {
-        this.game = new Game();
+    private Game game = Game.getInstance();
+
+    private Panel() {
+
     }
 
     public Game getGame() {
         return this.game;
+    }
+
+    public static Panel getInstance() {
+        return instance;
     }
 
     @Override

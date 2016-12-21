@@ -106,6 +106,10 @@ public class Piece extends JPanel {
         return this.pieceOrigin;
     }
 
+    public int getRotation() {
+        return this.rotation;
+    }
+
     public Color getCurrentPieceColor() {
         return this.tetrominoColors[this.currentPiece];
     }

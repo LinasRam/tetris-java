@@ -5,12 +5,17 @@ import java.awt.event.KeyListener;
 
 public class KeyController implements KeyListener {
 
-    private Panel panel;
-    private Game game;
+    private static KeyController instance = new KeyController();
 
-    public KeyController(Panel panel) {
-        this.panel = panel;
-        this.game = panel.getGame();
+    private Panel panel = Panel.getInstance();
+    private Game game = Game.getInstance();
+
+    private KeyController() {
+
+    }
+
+    public static KeyController getInstance() {
+        return instance;
     }
 
     @Override

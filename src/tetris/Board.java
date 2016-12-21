@@ -6,9 +6,11 @@ import java.awt.Point;
 
 public class Board {
 
+    private static Board instance = new Board();
+    
     private Color[][] board;
 
-    public Board() {
+    private Board() {
         this.board = new Color[12][24];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 23; j++) {
@@ -19,6 +21,10 @@ public class Board {
                 }
             }
         }
+    }
+
+    public static Board getInstance() {
+        return instance;
     }
 
     public Color[][] toArray() {

@@ -7,13 +7,18 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel {
 
-    private Board board;
+    private static Game instance = new Game();
+    
+    private Board board = Board.getInstance();
     private Piece piece;
     private long score;
 
-    public Game() {
-        this.board = new Board();
+    private Game() {
         this.piece = new Piece();
+    }
+
+    public static Game getInstance() {
+        return instance;
     }
 
     public Board getBoard() {
